@@ -1,6 +1,3 @@
-require "clidex/version"
+require_relative "clidex/version"
+require_relative "clidex/cli"
 
-module Clidex
-  class Error < StandardError; end
-  # Your code goes here...
-end

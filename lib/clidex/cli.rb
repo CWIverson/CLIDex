@@ -1,4 +1,4 @@
-class CliDex::CLI
+class Clidex::CLI
     def call
         greeting
         menu
@@ -67,6 +67,8 @@ class CliDex::CLI
             when "exit"
                 goodbye
                 exit
+            when "menu"
+                menu
             else
                 puts"Unrecognized pokemon, please try again."
             end
@@ -82,6 +84,8 @@ class CliDex::CLI
             when "exit"
                 goodbye
                 exit
+            when "menu"
+                menu
             else
                 puts "Unrecognized type, please try again."
             end
@@ -97,6 +101,8 @@ class CliDex::CLI
             when "exit"
                 goodbye
                 exit
+            when "menu"
+                menu
             else 
                 puts "unrecognized region, please try again."
             end
