@@ -4,12 +4,10 @@ require 'json'
 require 'pry'
 
 class GetRequester
-    @@search_history=[]
+    
     attr_reader :category, :searched_item, :url
-    def initialize(search_category, search_term)
-        @category=search_category
-        @searched_item = search_term
-        @url= "https://pokeapi.co/api/v2/#{search_category}/#{search_term}"
+    def initialize(url)
+        @url= url
 
     end
     def get_response_body
@@ -25,6 +23,3 @@ class GetRequester
 
 end
 
-#object = GetRequester.new("pokemon", "charmander")
-
-#puts object.json_parser

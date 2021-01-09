@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
 require "bundler/setup"
-require 'clidex'
+require_all 'lib'
 
 Clidex::CLI.new.call
