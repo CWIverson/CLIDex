@@ -25,6 +25,6 @@ class GetRequester
 
 end
 
-object = GetRequester.new("pokemon-species", "charmander")
+#object = GetRequester.new("pokemon", "charmander")
 
-puts object.json_parser
+#puts object.json_parser
