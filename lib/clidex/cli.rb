@@ -36,13 +36,10 @@ class Clidex::CLI
                 puts "explanation text"
 
             when "2"
-                puts "Whats the name of the pokemon you would like to search for?"
                 search_by_name
-            when "3"
-                puts "What pokemon type would you like to search for?"
+            when "3"         
                 search_by_type
             when "4"
-                puts "What region would you like to search?"
                 search_by_region
             when "5"
                 puts "menu explanation"
@@ -50,7 +47,7 @@ class Clidex::CLI
                 menu
             when "exit"
                 goodbye
-                exit
+               
             else
                 puts "Invalid input. Type menu to return."
             end
@@ -58,8 +55,10 @@ class Clidex::CLI
     end
     def goodbye
         puts "Thank you for using CLIDex!"
+        exit
     end
     def search_by_name
+        puts "What's the name of the pokemon you would like to search?"
         input = nil
         while input != "exit"
             input = gets.strip.downcase
@@ -71,6 +70,7 @@ class Clidex::CLI
         menu
     end
     def search_by_type
+        puts "What type of pokemon would you like to search for?"
         input = nil
         while input != "exit"
             input = gets.strip.downcase
@@ -82,14 +82,20 @@ class Clidex::CLI
         menu
     end
     def search_by_region
-        input = nil
-        while input != "exit"
-            input = gets.strip.downcase
+        puts "What regions pokemon would you like to see?"
+        input = gets.strip.downcase
+        if input == "exit"
+            goodbye
+        elsif input == "menu"
+            menu
+        elsif input == "pokemon"
+            search_by_name
+        elsif input == "type"
+            search_by_type
+        else
             Region.search_by_region(input)
-            if input == "menu"
-                menu
-            end
+            search_by_region
         end
-        menu
+        
     end
 end

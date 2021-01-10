@@ -18,6 +18,7 @@ class GetRequester
     end
     def input_checker
         if self.get_response_body == "Not Found"  
+            puts "Invalid input, please try again"
             "invalid input"
         else
             self.json_parser

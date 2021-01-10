@@ -21,4 +21,4 @@ class Pokemon
     
 end
 
-puts Pokemon.search_by_name("bulbasaur")
+#puts Pokemon.search_by_name("bulbasaur")
