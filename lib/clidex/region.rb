@@ -19,4 +19,4 @@ class Region
     end
    
 end
-puts Region.new("kanto").search_by_region("kanto")
+#puts Region.new("kanto").search_by_region("kanto")

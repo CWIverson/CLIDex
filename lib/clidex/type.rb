@@ -16,8 +16,8 @@ class Type
         type_pokemon = checked["pokemon"].map do |pokemon|
             pokemon["pokemon"]["name"]
         end
-
+        puts type_pokemon
     end
     
 end
-puts Type.new("water").search_by_type("water")
+#puts Type.new("water").search_by_type("water")

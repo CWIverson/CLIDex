@@ -1,4 +1,6 @@
 require_relative 'pokemon.rb'
+require_relative 'type.rb'
+require_relative 'region.rb'
 class Clidex::CLI
     def call
         greeting
@@ -62,6 +64,9 @@ class Clidex::CLI
         while input != "exit"
             input = gets.strip.downcase
             Pokemon.search_by_name(input)
+            if input == "menu"
+                menu
+            end
         end
         menu
     end
@@ -69,34 +74,22 @@ class Clidex::CLI
         input = nil
         while input != "exit"
             input = gets.strip.downcase
-            case input
-            when "fire"
-                puts "all fire type pokemon"
-            when "exit"
-                goodbye
-                exit
-            when "menu"
+            Type.search_by_type(input)
+            if input == "menu"
                 menu
-            else
-                puts "Unrecognized type, please try again."
             end
         end
+        menu
     end
     def search_by_region
         input = nil
         while input != "exit"
             input = gets.strip.downcase
-            case input
-            when "kanto"
-                puts "all kanto pokemon"
-            when "exit"
-                goodbye
-                exit
-            when "menu"
+            Region.search_by_region(input)
+            if input == "menu"
                 menu
-            else 
-                puts "unrecognized region, please try again."
             end
         end
+        menu
     end
 end
