@@ -19,8 +19,8 @@ class Region
     end 
     def self.search_by_region(name)
         check = self.get_pokedex(name)
-        if check.is_a? String
-            return check
+        if check == "invalid input"
+            return nil
         end
         pokedex  = GetRequester.new("#{@pokedex_url}")
         checked = pokedex.input_checker

@@ -61,25 +61,34 @@ class Clidex::CLI
         puts "What's the name of the pokemon you would like to search?"
         input = nil
         while input != "exit"
-            input = gets.strip.downcase
-            Pokemon.search_by_name(input)
+            input = gets.strip.downcase 
             if input == "menu"
                 menu
+            elsif input == "exit"
+                goodbye
+            else
+                Pokemon.search_by_name(input)
             end
+            
         end
-        menu
+        goodbye
     end
     def search_by_type
         puts "What type of pokemon would you like to search for?"
-        input = nil
-        while input != "exit"
-            input = gets.strip.downcase
+        input = gets.strip.downcase
+        if input == "exit"
+            goodbye
+        elsif input == "menu"
+            menu
+        elsif input == "region"
+            search_by_region
+        elsif input == "name"
+            search_by_name
+        else
             Type.search_by_type(input)
-            if input == "menu"
-                menu
-            end
+            search_by_type
         end
-        menu
+         
     end
     def search_by_region
         puts "What regions pokemon would you like to see?"
@@ -88,12 +97,14 @@ class Clidex::CLI
             goodbye
         elsif input == "menu"
             menu
-        elsif input == "pokemon"
+        elsif input == "name"
             search_by_name
         elsif input == "type"
             search_by_type
         else
-            Region.search_by_region(input)
+            #puts "test"
+            return_value = Region.search_by_region(input)
+            puts return_value
             search_by_region
         end
         
