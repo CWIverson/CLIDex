@@ -1,3 +1,4 @@
+require_relative 'pokemon.rb'
 class Clidex::CLI
     def call
         greeting
@@ -43,7 +44,6 @@ class Clidex::CLI
                 search_by_region
             when "5"
                 puts "menu explanation"
-
             when "menu"
                 menu
             when "exit"
@@ -61,18 +61,9 @@ class Clidex::CLI
         input = nil
         while input != "exit"
             input = gets.strip.downcase
-            case input
-            when "pikachu"
-                puts "electric mouse pokemon"
-            when "exit"
-                goodbye
-                exit
-            when "menu"
-                menu
-            else
-                puts"Unrecognized pokemon, please try again."
-            end
+            Pokemon.search_by_name(input)
         end
+        menu
     end
     def search_by_type
         input = nil

@@ -1,3 +1,0 @@
-class Type
-
-end

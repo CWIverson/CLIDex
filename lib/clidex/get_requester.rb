@@ -1,7 +1,7 @@
 require 'net/http'
 require 'open-uri'
 require 'json'
-require 'pry'
+#require 'pry'
 
 class GetRequester
     
@@ -16,10 +16,17 @@ class GetRequester
         response.body
         #binding.pry
     end
+    def input_checker
+        if self.get_response_body == "Not Found"  
+            "invalid input"
+        else
+            self.json_parser
+        end
+    end
     def json_parser
         input = self.get_response_body
         JSON.parse(input)
     end
 
 end
-
+#puts GetRequester.new("https://pokeapi.co/api/v2/pokemon-species/charmandar").get_response_body.class
