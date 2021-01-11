@@ -4,12 +4,10 @@ require_relative 'region.rb'
 class Clidex::CLI
     def call
         greeting
-        menu
-        
+        menu        
     end
     def greeting
         puts <<-DOC 
-
         Welcome to CLIDex!
         DOC
     end
@@ -34,7 +32,6 @@ class Clidex::CLI
             case input
             when "1"
                 puts "explanation text"
-
             when "2"
                 search_by_name
             when "3"         
@@ -46,8 +43,7 @@ class Clidex::CLI
             when "menu"
                 menu
             when "exit"
-                goodbye
-               
+                goodbye  
             else
                 puts "Invalid input. Type menu to return."
             end
@@ -68,8 +64,7 @@ class Clidex::CLI
                 goodbye
             else
                 Pokemon.search_by_name(input)
-            end
-            
+            end            
         end
         goodbye
     end
@@ -82,8 +77,13 @@ class Clidex::CLI
                 goodbye
             elsif input == "menu"
                 menu
-            else
-                Type.search_by_type(input)
+            else                
+                if Type.search_by_type(input) == "invalid input" 
+                    input = gets.strip.downcase
+                    Type.search_by_type(input)
+                else
+                    checker
+                end              
                 puts "type the name of a pokemon you want to know more about"
                 new_input = nil
                 while new_input != "exit"
@@ -108,8 +108,13 @@ class Clidex::CLI
                 goodbye
             elsif input == "menu"
                 menu
-            else
-                Region.search_by_region(input)
+            else               
+                if Region.search_by_region(input) == nil 
+                    input = gets.strip.downcase
+                    Region.search_by_region(input)
+                else
+                    checker
+                end
                 puts "type the name of a pokemon you want to know more about"
                 new_input = nil
                 while new_input != "exit"

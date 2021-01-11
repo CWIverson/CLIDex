@@ -25,8 +25,7 @@ class Pokemon
         abilities = GetRequester.new("https://pokeapi.co/api/v2/pokemon/#{name}").json_parser
         ability_rundown = abilities["abilities"][0]["ability"]["name"].split(" ").join(" ")
         puts desc_and_ability = "#{text} Ability: #{ability_rundown}"  
-    end
-    
+    end    
 end
 
 #puts Pokemon.search_by_name("bulbasaur")
