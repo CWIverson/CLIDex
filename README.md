@@ -1,9 +1,6 @@
 # Clidex
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/clidex`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
-
+Welcome to CLIDex! This is a tool that provides information about pokemon, that allows you to search by name, type and region. Discover new and interesting pokemon with CLIDex!
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -22,7 +19,13 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+At the main menu simply enter the number of the menu item you want to use. 
+
+If searching for a pokemon by name, just enter that pokemons name into the console.
+
+If searching by type, enter the type of pokemon you are looking for. This will return a list of pokemon of that type. If you see a pokemon you wish to get a closer look at you can enter its name into the console to bring up its details.
+
+If searching by region, enter which region you want to see the pokemon for. This will return a list of pokemon from that region. Enter the name of any of those pokemon to bring up their details.
 
 ## Development
 
