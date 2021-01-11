@@ -75,38 +75,54 @@ class Clidex::CLI
     end
     def search_by_type
         puts "What type of pokemon would you like to search for?"
-        input = gets.strip.downcase
-        if input == "exit"
-            goodbye
-        elsif input == "menu"
-            menu
-        elsif input == "region"
-            search_by_region
-        elsif input == "name"
-            search_by_name
-        else
-            Type.search_by_type(input)
-            search_by_type
+        input = nil
+        while input != "exit"
+            input = gets.strip.downcase
+            if input == "exit"
+                goodbye
+            elsif input == "menu"
+                menu
+            else
+                Type.search_by_type(input)
+                puts "type the name of a pokemon you want to know more about"
+                new_input = nil
+                while new_input != "exit"
+                    new_input = gets.strip.downcase
+                    if new_input == "exit"
+                        goodbye
+                    elsif new_input == "menu"
+                        menu
+                    else
+                        Pokemon.search_by_name(new_input)
+                    end
+                end
+            end
         end
-         
     end
     def search_by_region
         puts "What regions pokemon would you like to see?"
-        input = gets.strip.downcase
-        if input == "exit"
-            goodbye
-        elsif input == "menu"
-            menu
-        elsif input == "name"
-            search_by_name
-        elsif input == "type"
-            search_by_type
-        else
-            #puts "test"
-            return_value = Region.search_by_region(input)
-            puts return_value
-            search_by_region
+        input = nil
+        while input != "exit" 
+            input = gets.strip.downcase
+            if input == "exit"
+                goodbye
+            elsif input == "menu"
+                menu
+            else
+                Region.search_by_region(input)
+                puts "type the name of a pokemon you want to know more about"
+                new_input = nil
+                while new_input != "exit"
+                    new_input = gets.strip.downcase
+                    if new_input == "exit"
+                        goodbye
+                    elsif new_input == "menu"
+                        menu
+                    else
+                    Pokemon.search_by_name(new_input)
+                    end
+                end
+            end
         end
-        
     end
 end
