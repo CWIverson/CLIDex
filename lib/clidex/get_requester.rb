@@ -1,7 +1,7 @@
 require 'net/http'
 require 'open-uri'
 require 'json'
-#require 'pry'
+
 
 class GetRequester
     
@@ -14,11 +14,10 @@ class GetRequester
         uri = URI.parse(@url)
         response = Net::HTTP.get_response(uri)
         response.body
-        #binding.pry
     end
     def input_checker
         if self.get_response_body == "Not Found"  
-            puts "Invalid input, please try again."
+            
             "invalid input"
         else
             self.json_parser
@@ -30,4 +29,4 @@ class GetRequester
     end
 
 end
-#puts GetRequester.new("https://pokeapi.co/api/v2/pokemon-species/charmandar").get_response_body.class
+

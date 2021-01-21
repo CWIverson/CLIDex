@@ -26,9 +26,11 @@ class Region
         checked = pokedex.input_checker
         
         pokemon_list = checked["pokemon_entries"].map do |pokemon|
-            pokemon["pokemon_species"]["name"]
+           p = Pokemon.find_or_create(pokemon["pokemon_species"]["name"])
+          # p.url = pokemon["pokemon_species"]["url"]
+           p
         end
-        puts pokemon_list
+       
     end
    
 end
