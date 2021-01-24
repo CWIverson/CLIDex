@@ -1,12 +1,13 @@
 require_relative 'get_requester.rb'
 class Pokemon
     @@all=[]
-    attr_accessor :name, :type, :url, :flavor_text, :abilities
+    attr_accessor :name, :type, :url, :flavor_text, :abilities, :valid
     def  initialize(name)
         @name = name
         # @flavor_text = self.find_flavor_text
         # @abilities = self.find_ability
         @@all<<self
+        @valid = "valid"
     end
 
     def self.all
@@ -61,16 +62,22 @@ class Pokemon
     # end
     def find_flavor_text
         info = GetRequester.new("https://pokeapi.co/api/v2/pokemon-species/#{name}").input_checker
-
-        text_hash = self.flavor_text = info["flavor_text_entries"].find do |entry|
-                        entry["language"]["name"] == "en"
-                    end
-        self.flavor_text = text_hash["flavor_text"].split(' ').join(' ')
-        
+        if info == "invalid input"
+            @valid = "invalid"
+        else
+            text_hash = self.flavor_text = info["flavor_text_entries"].find do |entry|
+                entry["language"]["name"] == "en"
+            end
+            self.flavor_text = text_hash["flavor_text"].split(' ').join(' ')
+        end
     end
-    def find_ability
-        ability_json = GetRequester.new("https://pokeapi.co/api/v2/pokemon/#{name}").json_parser
-        self.abilities = ability_json["abilities"][0]["ability"]["name"].split(" ").join(" ")
+    def find_ability        
+        ability_json = GetRequester.new("https://pokeapi.co/api/v2/pokemon/#{name}").input_checker
+        if ability_json == "invalid input"
+            @valid = "invalid"
+        else
+            self.abilities = ability_json["abilities"][0]["ability"]["name"].split(" ").join(" ")
+        end
     end
 end
 

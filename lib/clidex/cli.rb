@@ -62,60 +62,109 @@ class Clidex::CLI
         exit
     end
     def search_by_name
-        puts "What's the name of the pokemon you would like to search?"
+        
         input = nil
         while input != "exit"
+            puts "What's the name of the pokemon you would like to search?"
             input = gets.strip.downcase 
             if input == "menu"
                 menu
             elsif input == "exit"
                 goodbye
             else
-                Pokemon.search_by_name(input)
+                pokemon = Pokemon.find_or_create(input)
+                pokemon.find_ability
+                pokemon.find_flavor_text
+                if pokemon.valid == "valid"
+                    puts "#{pokemon.flavor_text} Ability: #{pokemon.abilities}"
+                else
+                    puts "Invalid input. Please try again."
+                end
             end            
         end
         goodbye
     end
+    def new_type_search(input)
+        type = Type.new(input)
+        type.search_by_type
+    end
+    def search_pokemon(input)
+        pokemon = new_type_search(input)
+        if pokemon == "invalid input"
+            puts "Invalid input, try again."
+            search(gets.strip.downcase)
+        else
+            pokemon.map do |pokemon|
+                pokemon
+            end
+        end
+    end
+    def type_list_print(input)
+        list = search_pokemon(input)
+        list.each do |pokemon|
+            puts pokemon.name
+        end
+    end
+
     def search_by_type
-        puts "What type of pokemon would you like to search for?"
+        
         input = nil
         while input != "exit"
+            puts "What type of pokemon would you like to search for?"
             input = gets.strip.downcase
             if input == "exit"
                 goodbye
             elsif input == "menu"
                 menu
             else                
-                if Type.search_by_type(input) == "invalid input" 
-                    input = gets.strip.downcase
-                    Type.search_by_type(input)
+                type_list_print(input)
+                list = search_pokemon(input)
                 
-                end              
-                puts "type the name of a pokemon you want to know more about"
                 new_input = nil
                 while new_input != "exit"
+                    puts "type the name of a pokemon you want to know more about"
                     new_input = gets.strip.downcase
                     if new_input == "exit"
                         goodbye
                     elsif new_input == "menu"
                         menu
                     else
-                        Pokemon.search_by_name(new_input)
+                        found_pokemon = list.find do |pokemon|
+                            pokemon.name == new_input
+                        end
+                        if found_pokemon == nil
+                            puts "invalid input. Please try again."
+                        else
+                            found_pokemon.find_ability
+                            found_pokemon.find_flavor_text     
+                            puts "#{found_pokemon.flavor_text} Ability: #{found_pokemon.abilities}"
+                        end
+                        # binding.pry
+                        
                     end
                 end
             end
         end
     end
-    def search(input)
-        pokemon = Region.search_by_region(input)      
+    def new_region_search(input)
+        region = Region.new(input)
+        region.get_pokedex
+    end
+    def search_list(input)
+        pokemon = new_region_search(input)      
         if pokemon == "invalid input"
             puts "Invalid input, try again."
             search(gets.strip.downcase)
         else
             pokemon.map do |pokemon|
-                puts pokemon.name
                 pokemon
             end
+        end
+    end
+    def list_print(input)
+        list = search_list(input)
+        list.each do |pokemon|
+            puts pokemon.name
         end
     end
     def search_by_region
@@ -128,7 +177,8 @@ class Clidex::CLI
             elsif input == "menu"
                 menu
             else      
-               list = search(input)
+               list_print(input)
+               list = search_list(input)
                 # binding.pry
                 new_input = nil
                 while new_input != "exit"

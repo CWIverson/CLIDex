@@ -5,19 +5,22 @@ class Type
     def initialize(name)
         @name= name
         @@all<<self
+        @pokemon = []
     end
 
-    def self.search_by_type(type_name)
-        type_list = GetRequester.new("https://pokeapi.co/api/v2/type/#{type_name}")
+    def search_by_type
+        type_list = GetRequester.new("https://pokeapi.co/api/v2/type/#{@name}")
         checked = type_list.input_checker
-        if checked.is_a? String
+        if checked == "invalid input"
             return checked
         end
-        type_pokemon = checked["pokemon"].map do |pokemon|
-            pokemon["pokemon"]["name"]
+        @pokemon = checked["pokemon"].map do |pokemon|
+            p = Pokemon.find_or_create(pokemon["pokemon"]["name"])
+       
         end
-        puts type_pokemon
     end
+
+   
     
 end
 #puts Type.new("water").search_by_type("water")
