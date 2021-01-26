@@ -11,11 +11,11 @@ class Type
     def search_by_type
         type_list = GetRequester.new("https://pokeapi.co/api/v2/type/#{@name}")
         checked = type_list.input_checker
-        if checked == "invalid input"
+        if checked.is_a? String
             return checked
         end
         @pokemon = checked["pokemon"].map do |pokemon|
-            p = Pokemon.find_or_create(pokemon["pokemon"]["name"])
+        p = Pokemon.find_or_create(pokemon["pokemon"]["name"])
        
         end
     end
